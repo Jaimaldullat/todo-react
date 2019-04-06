@@ -1,17 +1,86 @@
 import React from 'react';
 import TodoItem from './TodoItem';
-import todosData from './todosData';
 
-function MainContent() {
-    const todoItems = todosData.map(item => <TodoItem key={item.id} item={item}/>);
+class MainContent extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            todos: [],
+            value: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.onAddItem = this.onAddItem.bind(this);
+        this.onChangeValue = this.onChangeValue.bind(this);
+        this.uuidv4 = this.uuidv4.bind(this);
+    }
+
+    handleChange(id) {
+        this.setState((previousState) => {
+            const updatedTodos = previousState.todos.map((item) => {
+                if (item.id === id) {
+                    item.completed = !item.completed;
+                }
+                return item;
+            });
+            return {
+                todos: updatedTodos
+            }
+        })
+    }
+
+    onAddItem() {
+        if (this.state.value) {
+            this.setState(preState => {
+                const todos = preState.todos.concat(
+                    {
+                        value:preState.value,
+                        id: this.uuidv4(),
+                        completed: false
+                    }
+                    );
+                return {
+                    todos,
+                    value: ''
+                }
+            })
+        }
+    }
+    onChangeValue(e) {
+            this.setState({
+                    value: e.target.value
+            })
+    }
+     uuidv4() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        )
+    }
+
+render()
+{
+   const todoItems =  this.state.todos.length > 0 ? this.state.todos.map(item => <TodoItem key={item.id} handleChange={this.handleChange}
+                                                             item={item} />): <li style={{border:'none'}}>No item added</li>;
     return (
         <main>
             <div className='todo-main-div'>
                 <ul>
+                    {//this.state.todos
+                         }
+                    <label>
+                        <input
+                            name='name'
+                            value={this.state.value}
+                            onChange={this.onChangeValue}
+                            autoComplete='off'
+                            type='text'/>
+                        <button onClick={this.onAddItem}>Add</button>
+                    </label>
                     {todoItems}
                 </ul>
             </div>
         </main>
     )
-};
+}
+}
+;
 export default MainContent;

@@ -92,6 +92,29 @@ main .todo-main-div ul li {
   border-bottom: 1px solid #aaa;
   padding-bottom: 9px;
 }
+.todo-main-div ul li.completed{
+  text-decoration: line-through;
+  color: #aaa;
+}
+.todo-main-div ul label {
+  width: 100%;
+}
+.todo-main-div ul label input,
+.todo-main-div ul label button{
+  border: 1px solid #555;
+  border-radius: 6px;
+  margin-right: 10px;
+  line-height: 27px;
+  padding: 2px;
+}
+.todo-main-div ul label input:focus {
+  outline: none;
+}
+
+.todo-main-div ul label button{
+  padding: 2px 10px;
+  cursor: pointer;
+}
 /********************
 
   FOOTER

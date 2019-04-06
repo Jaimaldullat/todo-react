@@ -1,11 +1,13 @@
 import React from 'react';
 
-function Header() {
+class Header extends React.Component {
 
-    return (
-        <header>
-            <h1 className='todo-heading'>ToDo List</h1>
-        </header>
-    )
+    render() {
+        return (
+            <header>
+                <h1 className='todo-heading'>ToDo List</h1>
+            </header>
+        )
+    }
 };
 export default Header;
