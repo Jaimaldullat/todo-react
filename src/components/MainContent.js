@@ -2,14 +2,12 @@ import React from 'react';
 import TodoItem from './TodoItem';
 
 class MainContent extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            todos: [],
-            value: ''
-        }
-    }
 
+    state = {
+        todos: [],
+        value: ''
+    }
+    
     handleChange = (id) => {
         this.setState((previousState) => {
             const updatedTodos = previousState.todos.map((item) => {
