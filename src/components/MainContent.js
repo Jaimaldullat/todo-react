@@ -8,14 +8,9 @@ class MainContent extends React.Component {
             todos: [],
             value: ''
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.onAddItem = this.onAddItem.bind(this);
-        this.onChangeValue = this.onChangeValue.bind(this);
-        this.uuidv4 = this.uuidv4.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
-    handleChange(id) {
+    handleChange = (id) => {
         this.setState((previousState) => {
             const updatedTodos = previousState.todos.map((item) => {
                 if (item.id === id) {
@@ -29,7 +24,7 @@ class MainContent extends React.Component {
         })
     }
 
-    onAddItem() {
+    onAddItem = () => {
         if (this.state.value) {
             this.setState(preState => {
                 const todos = [
@@ -47,19 +42,19 @@ class MainContent extends React.Component {
         }
     }
 
-    onChangeValue(e) {
+    onChangeValue = (e) => {
         this.setState({
             value: e.target.value
         })
     }
 
-    handleKeyPress(e) {
-        if (e.key == 'Enter') {
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
             this.onAddItem();
         }
     }
 
-    uuidv4() {
+    uuidv4 = () => {
         return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
             (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
         )
